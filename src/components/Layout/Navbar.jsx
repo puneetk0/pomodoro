@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Timer, CheckSquare, BarChart2, Menu, X, Moon, Sun } from 'lucide-react';
+import { Timer, CheckSquare, BarChart2, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur shadow-md' : 'bg-transparent'
+      isScrolled ? 'bg-white/90 backdrop-blur shadow-md' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -52,8 +52,8 @@ const Navbar = () => {
                   px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-1
                   transition-all duration-200 
                   ${isActive
-                    ? 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                    ? 'text-red-500 bg-red-50'
+                    : 'text-gray-700 hover:text-red-500 hover:bg-gray-50'
                   }
                 `}
               >
@@ -61,16 +61,12 @@ const Navbar = () => {
                 <span>{link.label}</span>
               </NavLink>
             ))}
-            
-          
           </div>
 
           <div className="md:hidden flex items-center">
-           
-            
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="p-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -83,7 +79,7 @@ const Navbar = () => {
         isOpen 
           ? 'max-h-96 opacity-100 shadow-lg' 
           : 'max-h-0 opacity-0 pointer-events-none'
-      } overflow-hidden bg-white dark:bg-gray-900`}>
+      } overflow-hidden bg-white`}>
         <div className="pt-2 pb-4 space-y-1 px-4">
           {navLinks.map((link) => (
             <NavLink
@@ -93,8 +89,8 @@ const Navbar = () => {
                 block px-3 py-3 rounded-md text-base font-medium flex items-center space-x-3
                 transition-all duration-200
                 ${isActive
-                  ? 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                  ? 'text-red-500 bg-red-50'
+                  : 'text-gray-700 hover:text-red-500 hover:bg-gray-50'
                 }
               `}
             >

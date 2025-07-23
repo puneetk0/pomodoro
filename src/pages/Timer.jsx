@@ -4,7 +4,7 @@ import PomodoroTimer from '../components/Timer/PomodoroTimer';
 
 const Timer = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       
       <main className="flex-grow flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8 mt-10">

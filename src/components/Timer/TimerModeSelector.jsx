@@ -26,8 +26,8 @@ const TimerModeSelector = () => {
           className={`
             px-4 py-2 text-sm font-medium rounded-md transition-all
             ${mode === modeOption.value
-              ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+              ? 'bg-white text-gray-900 shadow-sm'
+              : 'text-gray-600 hover:text-gray-900'
             }
             ${isRunning ? 'cursor-not-allowed opacity-70' : ''}
           `}

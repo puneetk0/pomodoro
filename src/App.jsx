@@ -8,17 +8,17 @@ import Stats from './pages/Stats';
 
 function App() {
   return (
-      <TimerProvider>
-        <TaskProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Timer />} />
-              <Route path="/tasks" element={<Tasks />} />
-              <Route path="/stats" element={<Stats />} />
-            </Routes>
-          </Router>
-        </TaskProvider>
-      </TimerProvider>
+    <TimerProvider>
+      <TaskProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Timer />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/stats" element={<Stats />} />
+          </Routes>
+        </Router>
+      </TaskProvider>
+    </TimerProvider>
   );
 }
 

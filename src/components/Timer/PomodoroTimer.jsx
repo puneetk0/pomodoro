@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, SkipForward, RefreshCw, Check, Settings } from 'lucide-react';
+import { Play, Pause, RefreshCw, Check } from 'lucide-react';
 import { useTimer } from '../../context/TimerContext';
 import { useTasks } from '../../context/TaskContext';
 import TimerModeSelector from './TimerModeSelector';
-import TimerSettings from './TimerSettings';
 import TaskSelector from './TaskSelector';
 
 const PomodoroTimer = () => {
@@ -14,12 +13,10 @@ const PomodoroTimer = () => {
     startTimer, 
     pauseTimer, 
     resetTimer, 
-    skipTimer,
     currentTaskId
   } = useTimer();
   
   const { tasks, incrementPomodorosCompleted } = useTasks();
-  const [showSettings, setShowSettings] = useState(false);
   const [progress, setProgress] = useState(100);
   const [minutesInput, setMinutesInput] = useState('');
   const [secondsInput, setSecondsInput] = useState('');
@@ -49,26 +46,16 @@ const PomodoroTimer = () => {
     progressCircleRef.current.style.strokeDashoffset = offset.toString();
   }, [timeLeft, mode]);
   
-  useEffect(() => {
-    if (!progressCircleRef.current) return;
-    
-    if (isRunning) {
-      progressCircleRef.current.classList.add('animate-pulse-slow');
-    } else {
-      progressCircleRef.current.classList.remove('animate-pulse-slow');
-    }
-  }, [isRunning]);
-  
   const getModeColor = () => {
     switch (mode) {
       case 'pomodoro':
-        return 'text-red-500 dark:text-red-400';
+        return 'text-red-500';
       case 'shortBreak':
-        return 'text-green-500 dark:text-green-400';
+        return 'text-green-500';
       case 'longBreak':
-        return 'text-blue-500 dark:text-blue-400';
+        return 'text-blue-500';
       default:
-        return 'text-red-500 dark:text-red-400';
+        return 'text-red-500';
     }
   };
   
@@ -88,13 +75,13 @@ const PomodoroTimer = () => {
   const getProgressColor = () => {
     switch (mode) {
       case 'pomodoro':
-        return 'stroke-red-500 dark:stroke-red-400';
+        return 'stroke-red-500';
       case 'shortBreak':
-        return 'stroke-green-500 dark:stroke-green-400';
+        return 'stroke-green-500';
       case 'longBreak':
-        return 'stroke-blue-500 dark:stroke-blue-400';
+        return 'stroke-blue-500';
       default:
-        return 'stroke-red-500 dark:stroke-red-400';
+        return 'stroke-red-500';
     }
   };
   
@@ -119,10 +106,6 @@ const PomodoroTimer = () => {
     setIsEditing(false);
   };
   
-  const handleSettingsClick = () => {
-    setShowSettings(true);
-  };
-  
   return (
     <div className="flex flex-col items-center justify-center mt-4">
       <TimerModeSelector />
@@ -135,7 +118,7 @@ const PomodoroTimer = () => {
             r="120"
             fill="none"
             strokeWidth="12"
-            className="stroke-gray-200 dark:stroke-gray-700"
+            className="stroke-gray-200"
           />
           
           <circle
@@ -146,7 +129,7 @@ const PomodoroTimer = () => {
             fill="none"
             strokeWidth="12"
             strokeLinecap="round"
-            className={`${getProgressColor()} transition-all duration-1000 ease-linear`}
+            className={`${getProgressColor()}`}
             style={{
               strokeDasharray: 2 * Math.PI * 120,
               strokeDashoffset: 0,
@@ -201,7 +184,7 @@ const PomodoroTimer = () => {
       <div className="flex items-center space-x-4 mb-6">
         <button
           onClick={resetTimer}
-          className="p-3 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+          className="p-3 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors"
           aria-label="Reset timer"
         >
           <RefreshCw size={20} />
@@ -214,27 +197,9 @@ const PomodoroTimer = () => {
         >
           {isRunning ? <Pause size={24} /> : <Play size={24} />}
         </button>
-        
-        <button
-          onClick={skipTimer}
-          className="p-3 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-          aria-label="Skip to next timer"
-        >
-          <SkipForward size={20} />
-        </button>
-        
-        <button
-          onClick={handleSettingsClick}
-          className="p-3 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-          aria-label="Timer settings"
-        >
-          <Settings size={20} />
-        </button>
       </div>
       
       <TaskSelector />
-      
-      {showSettings && <TimerSettings onClose={() => setShowSettings(false)} />}
     </div>
   );
 };
